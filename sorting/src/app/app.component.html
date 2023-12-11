@@ -3,7 +3,7 @@
     <h1> Sorting Visualizer</h1>
     <div id="navbar"> 
         <div>
-            <button (click)="resetClick()"> <b>Reset Array</b></button>
+            <button (click)="sortParentService.resetClick()"> <b>Reset Array</b></button>
         </div>
         <div>
             <button > <b>Merge Sort</b></button>
@@ -21,7 +21,7 @@
   </div>
   
   <div class='container' >
-    <div *ngFor="let i of currentArray" class='array-bar' [ngStyle]="{'height': i + 'px'}">
+    <div *ngFor="let i of sortParentService.currentArray" class='array-bar' [ngStyle]="{'height': i + 'px'}">
     </div>
   </div>
 

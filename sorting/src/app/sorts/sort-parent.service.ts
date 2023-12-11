@@ -4,6 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SortParentService {
-
-  constructor() { }
+  currentArray: number[] = []
+  
+  constructor(){
+    this.resetClick()
+  }
+  resetClick(){
+    this.currentArray = []
+    for (let i = 0;i<200;i++){
+      this.currentArray.push(this.randomIntFromInterval(5,400))
+    }
+  }
+  randomIntFromInterval(min: number, max: number) {
+    return Math.floor(Math.random() * (max-min+1) + min )
+  }
 }
