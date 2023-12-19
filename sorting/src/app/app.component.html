@@ -6,10 +6,10 @@
             <button (click)="sortParentService.resetClick()"> <b>Reset Array</b></button>
         </div>
         <div>
-            <button > <b>Merge Sort</b></button>
+            <button (click)="sortParentService.setArray(mergeService.doMergeSort(sortParentService.currentArray))"> <b>Merge Sort</b></button>
         </div>
         <div>
-            <button><b>Quick Sort</b></button>
+            <button (click)="sortParentService.setArray(quickService.quickSort(sortParentService.currentArray))"><b>Quick Sort</b></button>
         </div>
         <div>
             <button><b>Heap Sort</b></button>

@@ -9,6 +9,10 @@ export class SortParentService {
   constructor(){
     this.resetClick()
   }
+
+  setArray(args: number[]){
+    this.currentArray = args
+  }
   resetClick(){
     this.currentArray = []
     for (let i = 0;i<200;i++){
