@@ -12,10 +12,10 @@
             <button (click)="sortParentService.setArray(quickService.quickSort(sortParentService.currentArray))"><b>Quick Sort</b></button>
         </div>
         <div>
-            <button><b>Heap Sort</b></button>
+            <button (click)="sortParentService.setArray(heapService.heapSort(sortParentService.currentArray))"><b>Heap Sort</b></button>
         </div>
         <div>
-            <button><b>Bubble Sort</b></button>
+            <button (click)="sortParentService.setArray(bubbleService.bubbleSort(sortParentService.currentArray))"><b>Bubble Sort</b></button>
         </div>
     </div>
   </div>

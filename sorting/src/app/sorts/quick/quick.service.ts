@@ -4,7 +4,7 @@ import { SortParentService } from '../sort-parent.service';
 @Injectable({
   providedIn: 'root'
 })
-export class QuickService  extends SortParentService{
+export class QuickService extends SortParentService{
 
   constructor() {
     super();
