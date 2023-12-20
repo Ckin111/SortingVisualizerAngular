@@ -150,27 +150,23 @@ export class AppComponent {
     }
   }
 
-  bubbleSort(array: number[]): number[] {
+  async bubbleSort(array: number[]): Promise<number[]> {
     const n = array.length;
 
     for (let i = 0; i < n - 1; i++) {
       
       for (let j = 0; j < n - 1 - i; j++) {
         // Compare adjacent elements and swap if they are in the wrong order
-        timer(1000).subscribe(() => {
-          // Code to be executed after the delay
           if (array[j] < array[j + 1]) {
             [array[j], array[j + 1]] = [array[j + 1], array[j]]; // Swap elements
+            await this.delay(1); // 2000 milliseconds = 2 seconds
           }
-          console.log('Delayed code after 1 second');
-        });
-        this.setArray(array)
-        // setTimeout(() => {
-        //   // Code to be executed after the delay
-        // }, 500);
       }
     }
 
     return array;
+  }
+  delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
