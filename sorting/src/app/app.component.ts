@@ -34,31 +34,36 @@ export class AppComponent {
     return Math.floor(Math.random() * (max-min+1) + min )
   }
 
-  quickSort(arr: number[]): number[] {
+  quickSort(arr: number[]) {
     return this.doQuickSort(arr, 0, arr.length - 1);
   }
 
   // Private recursive method for quick sort
-  private doQuickSort(array: number[], left: number, right: number): number[] {
+  private async doQuickSort(array: number[], left: number, right: number): Promise<number[]> {
     if (array.length > 1) {
       const index = this.partition(array, left, right);
-      if (left < index - 1) {
-        this.doQuickSort(array, left, index - 1);
+      if (left < await index - 1) {
+        await this.delay(1); // 2000 milliseconds = 2 seconds
+
+        this.doQuickSort(array, left, await index - 1);
       }
-      if (index < right) {
-        this.doQuickSort(array, index, right);
+      if (await index < right) {
+        await this.delay(1); // 2000 milliseconds = 2 seconds
+
+        this.doQuickSort(array, await index, right);
       }
     }
     return array;
   }
 
   // Private helper method to partition the array
-  private partition(array: number[], left: number, right: number): number {
+  private async partition(array: number[], left: number, right: number): Promise<number> {
     const pivot = array[Math.floor((left + right) / 2)];
     let i = left;
     let j = right;
 
     while (i <= j) {
+      
       while (array[i] > pivot) {
         i++;
       }
@@ -66,6 +71,8 @@ export class AppComponent {
         j--;
       }
       if (i <= j) {
+        await this.delay(100); // 2000 milliseconds = 2 seconds
+        
         [array[i], array[j]] = [array[j], array[i]]; // Swap elements
         i++;
         j--;
