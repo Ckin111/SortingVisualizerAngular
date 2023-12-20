@@ -15,11 +15,11 @@ import { timer } from 'rxjs';
 export class AppComponent {
   completionState: boolean = false
   sortingState: string = ''
+  currentArray: number[] = []
+
   constructor(public sortParentService: SortParentService, public mergeService: MergeService, public quickService: QuickService, public heapService: HeapService, public bubbleService: BubbleService){
     this.resetClick()
   }
-
-  currentArray: number[] = []
 
   setArray(args: number[]){
     this.currentArray = args
@@ -83,7 +83,7 @@ export class AppComponent {
     const middle = Math.floor(array.length / 2);
     const left = array.slice(0, middle);
     const right = array.slice(middle);
-    // this.currentArray = array
+    this.currentArray = array
     return this.merge(this.doMergeSort(left), this.doMergeSort(right));
   }
 
@@ -105,19 +105,21 @@ export class AppComponent {
     return result.concat(left.slice(leftIndex), right.slice(rightIndex));
   }
 
-  public heapSort(array: number[]): number[] {
+  async heapSort(array: number[]): Promise<number[]> {
     const n = array.length;
 
     // Build the max heap
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      await this.delay(50);
+      
       this.heapify(array, n, i);
     }
 
     // Extract elements from the heap one by one
     for (let i = n - 1; i > 0; i--) {
+      await this.delay(50);
       // Swap the root (maximum element) with the last element
       [array[0], array[i]] = [array[i], array[0]];
-
       // Call max heapify on the reduced heap
       this.heapify(array, i, 0);
     }
@@ -126,7 +128,7 @@ export class AppComponent {
   }
 
   // Private method to heapify a subtree rooted with node i which is an index in the array
-  private heapify(array: number[], heapSize: number, i: number): void {
+  private async heapify(array: number[], heapSize: number, i: number): Promise<void> {
     var largest = i;
     const left = 2 * i + 1;
     const right = 2 * i + 2;
@@ -144,7 +146,6 @@ export class AppComponent {
     // If the largest is not the root
     if (largest !== i) {
       [array[i], array[largest]] = [array[largest], array[i]];
-      
       // Recursively heapify the affected sub-tree
       this.heapify(array, heapSize, largest);
     }
