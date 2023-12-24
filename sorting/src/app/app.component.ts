@@ -123,7 +123,7 @@ export class AppComponent {
 
     while (i < leftSize && j < rightSize) {
       // needs to be await
-      await this.delay(500);
+      await this.delay(50);
 
       if (leftArray[i] >= rightArray[j]) {
         arr[k] = leftArray[i];
