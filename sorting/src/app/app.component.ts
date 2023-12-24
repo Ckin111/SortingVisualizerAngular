@@ -91,6 +91,7 @@ export class AppComponent {
 
       await this.delay(50);
       await this.mergeSort(arr, low, mid);
+      await this.delay(50);
       await this.mergeSort(arr, mid + 1, high);
       await this.delay(50);
 
@@ -98,7 +99,7 @@ export class AppComponent {
     }
   }
 
-  merge(arr: number[], low: number, mid: number, high: number): void {
+  async merge(arr: number[], low: number, mid: number, high: number): Promise<void> {
     const leftSize = mid - low + 1;
     const rightSize = high - mid;
 
@@ -106,10 +107,13 @@ export class AppComponent {
     const rightArray: number[] = new Array(rightSize);
 
     for (let i = 0; i < leftSize; i++) {
+      await this.delay(5);
       leftArray[i] = arr[low + i];
     }
 
     for (let j = 0; j < rightSize; j++) {
+      await this.delay(5);
+
       rightArray[j] = arr[mid + 1 + j];
     }
 
@@ -119,6 +123,8 @@ export class AppComponent {
 
     while (i < leftSize && j < rightSize) {
       // needs to be await
+      await this.delay(500);
+
       if (leftArray[i] >= rightArray[j]) {
         arr[k] = leftArray[i];
         i++;
@@ -131,6 +137,8 @@ export class AppComponent {
 
     while (i < leftSize) {
       // needs to be await
+      await this.delay(5);
+
       arr[k] = leftArray[i];
       i++;
       k++;
@@ -138,6 +146,8 @@ export class AppComponent {
 
     while (j < rightSize) {
       // needs to be await
+      await this.delay(5);
+
       arr[k] = rightArray[j];
       j++;
       k++;
