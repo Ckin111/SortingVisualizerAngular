@@ -81,35 +81,67 @@ export class AppComponent {
 
     return i;
   }
-
-  doMergeSort(array: number[]): number[] {
-    if (array.length <= 1) {
-      return array;
-    }
-
-    const middle = Math.floor(array.length / 2);
-    const left = array.slice(0, middle);
-    const right = array.slice(middle);
-    this.currentArray = array
-    return this.merge(this.doMergeSort(left), this.doMergeSort(right));
+  sortmerge() {
+    this.mergeSort(this.currentArray, 0, this.currentArray.length - 1);
   }
 
-  // Private helper method to merge two sorted arrays
-  private merge(left: number[], right: number[]): number[] {
-    let result: number[] = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
+  async mergeSort(arr: number[], low: number, high: number): Promise<void> {
+    if (low < high) {
+      const mid = Math.floor((low + high) / 2);
 
-    while (leftIndex < left.length && rightIndex < right.length) {
-      if (left[leftIndex] > right[rightIndex]) {
-        result.push(left[leftIndex]);
-        leftIndex++;
-      } else {
-        result.push(right[rightIndex]);
-        rightIndex++;
-      }
+      await this.delay(50);
+      await this.mergeSort(arr, low, mid);
+      await this.mergeSort(arr, mid + 1, high);
+      await this.delay(50);
+
+      await this.merge(arr, low, mid, high);
     }
-    return result.concat(left.slice(leftIndex), right.slice(rightIndex));
+  }
+
+  merge(arr: number[], low: number, mid: number, high: number): void {
+    const leftSize = mid - low + 1;
+    const rightSize = high - mid;
+
+    const leftArray: number[] = new Array(leftSize);
+    const rightArray: number[] = new Array(rightSize);
+
+    for (let i = 0; i < leftSize; i++) {
+      leftArray[i] = arr[low + i];
+    }
+
+    for (let j = 0; j < rightSize; j++) {
+      rightArray[j] = arr[mid + 1 + j];
+    }
+
+    let i = 0;
+    let j = 0;
+    let k = low;
+
+    while (i < leftSize && j < rightSize) {
+      // needs to be await
+      if (leftArray[i] >= rightArray[j]) {
+        arr[k] = leftArray[i];
+        i++;
+      } else {
+        arr[k] = rightArray[j];
+        j++;
+      }
+      k++;
+    }
+
+    while (i < leftSize) {
+      // needs to be await
+      arr[k] = leftArray[i];
+      i++;
+      k++;
+    }
+
+    while (j < rightSize) {
+      // needs to be await
+      arr[k] = rightArray[j];
+      j++;
+      k++;
+    }
   }
 
   async heapSort(array: number[]): Promise<number[]> {
