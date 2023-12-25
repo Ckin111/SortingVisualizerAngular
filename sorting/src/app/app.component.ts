@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { SortParentService } from './sorts/sort-parent.service';
-import { MergeService } from './sorts/merge/merge.service';
-import { QuickService } from './sorts/quick/quick.service';
-import { HeapService } from './sorts/heap/heap.service';
-import { BubbleService } from './sorts/bubble/bubble.service';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  completionState: boolean = false
-  sortingState: string = ''
+export class AppComponent implements OnInit{
   currentArray: number[] = []
 
-  constructor(public sortParentService: SortParentService, public mergeService: MergeService, public quickService: QuickService, public heapService: HeapService, public bubbleService: BubbleService){
+  ngOnInit(): void {
     this.resetClick()
   }
 
@@ -89,11 +81,11 @@ export class AppComponent {
     if (low < high) {
       const mid = Math.floor((low + high) / 2);
 
-      await this.delay(50);
+      await this.delay(20);
       await this.mergeSort(arr, low, mid);
-      await this.delay(50);
+      await this.delay(20);
       await this.mergeSort(arr, mid + 1, high);
-      await this.delay(50);
+      await this.delay(20);
 
       await this.merge(arr, low, mid, high);
     }
@@ -107,12 +99,12 @@ export class AppComponent {
     const rightArray: number[] = new Array(rightSize);
 
     for (let i = 0; i < leftSize; i++) {
-      await this.delay(5);
+      await this.delay(30);
       leftArray[i] = arr[low + i];
     }
 
     for (let j = 0; j < rightSize; j++) {
-      await this.delay(5);
+      await this.delay(30);
 
       rightArray[j] = arr[mid + 1 + j];
     }
@@ -123,7 +115,7 @@ export class AppComponent {
 
     while (i < leftSize && j < rightSize) {
       // needs to be await
-      await this.delay(50);
+      await this.delay(30);
 
       if (leftArray[i] >= rightArray[j]) {
         arr[k] = leftArray[i];
@@ -137,7 +129,7 @@ export class AppComponent {
 
     while (i < leftSize) {
       // needs to be await
-      await this.delay(5);
+      await this.delay(30);
 
       arr[k] = leftArray[i];
       i++;
@@ -146,7 +138,7 @@ export class AppComponent {
 
     while (j < rightSize) {
       // needs to be await
-      await this.delay(5);
+      await this.delay(30);
 
       arr[k] = rightArray[j];
       j++;
