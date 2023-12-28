@@ -3,25 +3,25 @@
     <h1> Sorting Visualizer</h1>
     <div id="navbar"> 
         <div>
-            <button (click)="sortParentService.resetClick()"> <b>Reset Array</b></button>
+            <button (click)="resetClick()"> <b>Reset Array</b></button>
         </div>
         <div>
-            <button (click)="sortParentService.setArray(mergeService.doMergeSort(sortParentService.currentArray))"><b>Merge Sort</b></button>
+          <button (click)="quickSort(currentArray)"><b>Quick Sort</b></button>
         </div>
         <div>
-            <button (click)="sortParentService.setArray(quickService.quickSort(sortParentService.currentArray))"><b>Quick Sort</b></button>
+          <button (click)="sortmerge()"><b>Merge Sort</b></button>
         </div>
         <div>
-            <button (click)="sortParentService.setArray(heapService.heapSort(sortParentService.currentArray))"><b>Heap Sort</b></button>
+            <button (click)="heapSort(currentArray)"><b>Heap Sort</b></button>
         </div>
         <div>
-            <button (click)="sortParentService.setArray(bubbleService.bubbleSort(sortParentService.currentArray))"><b>Bubble Sort</b></button>
+            <button (click)="bubbleSort(currentArray)"><b>Bubble Sort</b></button>
         </div>
     </div>
   </div>
   
   <div class='container' >
-    <div *ngFor="let i of sortParentService.currentArray" class='array-bar' [ngStyle]="{'height': i + 'px'}">
+    <div *ngFor="let i of currentArray" class='array-bar' [ngStyle]="{'height': i + 'px'}">
     </div>
   </div>
 
