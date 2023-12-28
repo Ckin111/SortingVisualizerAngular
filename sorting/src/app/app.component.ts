@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -8,20 +8,44 @@ import { OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   currentArray: number[] = []
-
+  arrayLength: number = 200;
   ngOnInit(): void {
     this.resetClick()
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    var width = window.innerWidth
+    console.log(width)
+    if (width > 800){
+      if (this.arrayLength != 200){
+        this.arrayLength = 200
+        this.resetClick()
+      }
+    }else if ((800 > width) && (width > 600)){
+      if (this.arrayLength != 140){
+        this.arrayLength = 140
+        this.resetClick()
+      }
+    }else{
+      if (this.arrayLength != 100){
+        this.arrayLength = 100
+        this.resetClick()
+      }
+    }
   }
 
   setArray(args: number[]){
     this.currentArray = args
   }
+
   resetClick(){
     this.currentArray = []
-    for (let i = 0;i<200;i++){
+    for (let i = 0;i<this.arrayLength;i++){
       this.currentArray.push(this.randomIntFromInterval(5,400))
     }
   }
+
   randomIntFromInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max-min+1) + min )
   }
@@ -35,12 +59,12 @@ export class AppComponent implements OnInit{
     if (array.length > 1) {
       const index = this.partition(array, left, right);
       if (left < await index - 1) {
-        await this.delay(1); // 2000 milliseconds = 2 seconds
+        await this.delay(1); 
 
         this.doQuickSort(array, left, await index - 1);
       }
       if (await index < right) {
-        await this.delay(1); // 2000 milliseconds = 2 seconds
+        await this.delay(1); 
 
         this.doQuickSort(array, await index, right);
       }
@@ -63,9 +87,9 @@ export class AppComponent implements OnInit{
         j--;
       }
       if (i <= j) {
-        await this.delay(100); // 2000 milliseconds = 2 seconds
+        await this.delay(100);
         
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        [array[i], array[j]] = [array[j], array[i]];
         i++;
         j--;
       }
@@ -128,18 +152,14 @@ export class AppComponent implements OnInit{
     }
 
     while (i < leftSize) {
-      // needs to be await
       await this.delay(30);
-
       arr[k] = leftArray[i];
       i++;
       k++;
     }
 
     while (j < rightSize) {
-      // needs to be await
       await this.delay(30);
-
       arr[k] = rightArray[j];
       j++;
       k++;
@@ -148,7 +168,6 @@ export class AppComponent implements OnInit{
 
   async heapSort(array: number[]): Promise<number[]> {
     const n = array.length;
-
     // Build the max heap
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
       await this.delay(50);
